@@ -1,0 +1,781 @@
+{
+  "components": {
+    "layouts": {
+      "auth": {
+        "labels": {
+          "badge": "TaskFlow Panel",
+          "title": "Gününü akışa al, görevlerini akıllıca yönet.",
+          "subtitle": "TaskFlow ile ekibinin görevlerini tek panelden takip et, önceliklendir ve tamamla. Minimal, odaklı ve tamamen karanlık bir arayüz.",
+          "highlightTitle": "Gerçek zamanlı görev takibi",
+          "highlightDescription": "Paneller, filtreler ve detaylı görev görünümü."
+        }
+      },
+      "dashboard": {
+        "header": {
+          "actions": {
+            "newTask": "Yeni Görev"
+          },
+          "search": {
+            "placeholder": "Görev ara..."
+          }
+        },
+        "sidebar": {
+          "navigation": {
+            "home": "Anasayfa",
+            "tasks": "Görevlerim",
+            "calendar": "Takvim",
+            "categories": "Kategoriler",
+            "roles": "Roller",
+            "users": "Kullanıcılar"
+          }
+        },
+        "userProfileDropdown": {
+          "changePassword": "Parola Değiştir",
+          "logout": "Çıkış"
+        }
+      }
+    },
+    "pagination": {
+      "labels": {
+        "total": "<strong>{{length}}</strong> kayıt bulundu",
+        "page": "Sayfa"
+      }
+    }
+  },
+  "pages": {
+    "login": {
+      "labels": {
+        "title": "Hesabına giriş yap",
+        "description": "Görev panellerine erişmek için bilgilerini gir.",
+        "registerText": "Hesabın yok mu?"
+      },
+      "actions": {
+        "login": "Panele giriş yap",
+        "register": "Kayıt ol",
+        "forgotPassword": "Şifreni mi unuttun?"
+      },
+      "forms": {
+        "email": {
+          "label": "E-posta adresi",
+          "placeholder": "ornek@taskflow.app",
+          "errors": {
+            "required": "E-posta adresi gereklidir",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin",
+            "maxlength": "E-posta adresi en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "password": {
+          "label": "Şifre",
+          "placeholder": "••••••••",
+          "errors": {
+            "required": "Şifre gereklidir",
+            "minlength": "Şifre en az {{min}} karakter olmalıdır",
+            "maxlength": "Şifre en fazla {{max}} karakter olmalıdır"
+          }
+        }
+      }
+    },
+    "register": {
+      "labels": {
+        "title": "Hesap Oluştur",
+        "description": "TaskFlow'a başlamak için kayıt ol",
+        "loginText": "Zaten hesabın var mı?"
+      },
+      "actions": {
+        "register": "Kayıt Ol",
+        "login": "Giriş Yap"
+      },
+      "forms": {
+        "firstName": {
+          "label": "Ad",
+          "placeholder": "Adınızı girin",
+          "errors": {
+            "required": "Ad gereklidir",
+            "maxlength": "Ad en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "lastName": {
+          "label": "Soyad",
+          "placeholder": "Soyadınızı girin",
+          "errors": {
+            "required": "Soyad gereklidir",
+            "maxlength": "Soyad en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "phoneNumber": {
+          "label": "Telefon Numarası",
+          "placeholder": "Telefon numaranızı girin",
+          "errors": {
+            "maxlength": "Telefon numarası en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "email": {
+          "label": "E-posta adresi",
+          "placeholder": "E-posta adresinizi girin",
+          "errors": {
+            "required": "E-posta adresi gereklidir",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin",
+            "maxlength": "E-posta adresi en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "password": {
+          "label": "Şifre",
+          "placeholder": "Şifrenizi girin",
+          "errors": {
+            "required": "Şifre gereklidir",
+            "minlength": "Şifre en az {{min}} karakter olmalıdır",
+            "maxlength": "Şifre en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "confirmPassword": {
+          "label": "Şifre Tekrar",
+          "placeholder": "Şifrenizi tekrar girin",
+          "errors": {
+            "required": "Lütfen şifrenizi tekrar girin",
+            "match": "Şifreler eşleşmiyor"
+          }
+        }
+      }
+    },
+    "confirmEmail": {
+      "labels": {
+        "title": "E-postanızı Doğrulayın",
+        "description": "{{email}} adresine 6 haneli doğrulama kodu gönderdik",
+        "resendText": "Kodu almadınız mı?"
+      },
+      "actions": {
+        "verify": "E-postayı Doğrula",
+        "resend": "Kodu Tekrar Gönder"
+      },
+      "forms": {
+        "email": {
+          "label": "E-posta adresi",
+          "placeholder": "E-posta adresinizi girin",
+          "errors": {
+            "required": "E-posta adresi gereklidir",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin",
+            "maxlength": "E-posta adresi en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "code": {
+          "label": "Doğrulama Kodu",
+          "placeholder": "000000",
+          "hint": "E-postanıza gönderilen 6 haneli kodu girin",
+          "errors": {
+            "required": "Doğrulama kodu gereklidir",
+            "length": "Kod tam olarak {{length}} haneli olmalıdır",
+            "numeric": "Kod sadece rakamlardan oluşmalıdır"
+          }
+        }
+      },
+      "messages": {
+        "success": "E-posta başarıyla doğrulandı",
+        "resendSuccess": "Doğrulama kodu e-postanıza tekrar gönderildi",
+        "invalidCode": "Geçersiz veya süresi dolmuş doğrulama kodu. {{remaining}} deneme hakkınız kaldı.",
+        "noAttemptsLeft": "Maksimum deneme sayısını aştınız. Artık kodu doğrulayamazsınız. Lütfen yeni bir doğrulama kodu isteyin."
+      }
+    },
+    "forgotPassword": {
+      "labels": {
+        "title": "Şifremi Unuttum",
+        "description": "E-posta adresinizi girin, size şifre sıfırlama kodu gönderelim",
+        "backToLogin": "Şifreni hatırladın mı?"
+      },
+      "actions": {
+        "sendCode": "Sıfırlama Kodu Gönder",
+        "login": "Giriş Yap"
+      },
+      "forms": {
+        "email": {
+          "label": "E-posta adresi",
+          "placeholder": "E-posta adresinizi girin",
+          "errors": {
+            "required": "E-posta adresi gereklidir",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin"
+          }
+        }
+      }
+    },
+    "verifyResetCode": {
+      "labels": {
+        "title": "Sıfırlama Kodunu Doğrula",
+        "description": "{{email}} adresine 6 haneli sıfırlama kodu gönderdik"
+      },
+      "actions": {
+        "verify": "Kodu Doğrula"
+      },
+      "messages": {
+        "invalidCode": "Geçersiz veya süresi dolmuş sıfırlama kodu. {{remaining}} deneme hakkınız kaldı.",
+        "noAttemptsLeft": "Maksimum deneme sayısını aştınız. Artık kodu doğrulayamazsınız. Lütfen yeni bir sıfırlama kodu talep edin."
+      },
+      "forms": {
+        "email": {
+          "label": "E-posta adresi",
+          "placeholder": "E-posta adresinizi girin",
+          "errors": {
+            "required": "E-posta adresi gereklidir",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin",
+            "maxlength": "E-posta adresi en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "code": {
+          "label": "Sıfırlama Kodu",
+          "placeholder": "000000",
+          "hint": "E-postanıza gönderilen 6 haneli kodu girin",
+          "errors": {
+            "required": "Sıfırlama kodu gereklidir",
+            "length": "Kod tam olarak {{length}} haneli olmalıdır",
+            "numeric": "Kod sadece rakamlardan oluşmalıdır"
+          }
+        }
+      }
+    },
+    "resetPassword": {
+      "labels": {
+        "title": "Şifre Sıfırla",
+        "description": "Yeni şifrenizi aşağıya girin",
+        "backToLogin": "Şifreni hatırladın mı?"
+      },
+      "actions": {
+        "reset": "Şifreyi Sıfırla",
+        "login": "Giriş Yap"
+      },
+      "forms": {
+        "email": {
+          "label": "E-posta adresi",
+          "placeholder": "E-posta adresinizi girin",
+          "errors": {
+            "required": "E-posta adresi gereklidir",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin",
+            "maxlength": "E-posta adresi en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "newPassword": {
+          "label": "Yeni Şifre",
+          "placeholder": "Yeni şifrenizi girin",
+          "errors": {
+            "required": "Yeni şifre gereklidir",
+            "minlength": "Şifre en az {{min}} karakter olmalıdır",
+            "maxlength": "Şifre en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "confirmNewPassword": {
+          "label": "Yeni Şifre Tekrar",
+          "placeholder": "Yeni şifrenizi tekrar girin",
+          "errors": {
+            "required": "Lütfen yeni şifrenizi tekrar girin",
+            "match": "Şifreler eşleşmiyor"
+          }
+        }
+      },
+      "messages": {
+        "success": "Şifre başarıyla sıfırlandı. Lütfen yeni şifrenizle giriş yapın."
+      }
+    },
+    "roles": {
+      "table": {
+        "name": "Rol Adı",
+        "description": "Açıklama",
+        "actions": "İşlemler",
+        "noRoles": "Rol bulunamadı",
+        "search": "Arama sonucu bulunamadı",
+        "searchPlaceholder": "Rol ara..."
+      },
+      "modals": {
+        "create": {
+          "title": "Yeni Rol Ekle"
+        },
+        "update": {
+          "title": "Rolü Güncelle"
+        },
+        "delete": {
+          "title": "Rolü Sil",
+          "message": "{{roleName}} adlı rolü silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+        },
+        "permissions": {
+          "title": "İzinleri Yönet - {{role}}",
+          "description": "Rol için izinleri seçin veya kaldırın. Seçili izinler rolün sahip olduğu yetkileri belirler.",
+          "totalPermissions": "Toplam İzinler",
+          "selected": "seçildi"
+        }
+      },
+      "forms": {
+        "name": {
+          "label": "Rol Adı",
+          "placeholder": "Rol adını girin",
+          "errors": {
+            "required": "Rol adı gereklidir",
+            "maxlength": "Rol adı en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "description": {
+          "label": "Açıklama",
+          "placeholder": "Rol açıklamasını girin",
+          "errors": {
+            "maxlength": "Açıklama en fazla {{max}} karakter olmalıdır"
+          }
+        }
+      },
+      "actions": {
+        "create": "Ekle",
+        "creating": "Ekleniyor...",
+        "update": "Güncelle",
+        "updating": "Güncelleniyor...",
+        "delete": "Sil",
+        "deleting": "Siliniyor...",
+        "save": "Kaydet",
+        "saving": "Kaydediliyor...",
+        "cancel": "İptal"
+      },
+      "messages": {
+        "createSuccess": "Rol başarıyla oluşturuldu",
+        "updateSuccess": "Rol başarıyla güncellendi",
+        "deleteSuccess": "Rol başarıyla silindi",
+        "permissionsUpdated": "İzinler başarıyla güncellendi"
+      }
+    },
+    "categories": {
+      "table": {
+        "name": "Kategori Adı",
+        "description": "Açıklama",
+        "color": "Renk",
+        "actions": "İşlemler",
+        "noCategories": "Kategori bulunamadı",
+        "search": "Arama sonucu bulunamadı",
+        "searchPlaceholder": "Kategori ara..."
+      },
+      "modals": {
+        "create": {
+          "title": "Yeni Kategori Ekle"
+        },
+        "update": {
+          "title": "Kategoriyi Güncelle"
+        },
+        "delete": {
+          "title": "Kategoriyi Sil",
+          "message": "{{categoryName}} adlı kategoriyi silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+        }
+      },
+      "forms": {
+        "name": {
+          "label": "Kategori Adı",
+          "placeholder": "Kategori adını girin",
+          "errors": {
+            "required": "Kategori adı gereklidir",
+            "maxlength": "Kategori adı en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "description": {
+          "label": "Açıklama",
+          "placeholder": "Kategori açıklamasını girin",
+          "errors": {
+            "maxlength": "Açıklama en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "colorHex": {
+          "label": "Renk",
+          "placeholder": "#RRGGBB",
+          "selected": "Seçilen",
+          "errors": {
+            "maxlength": "Renk en fazla {{max}} karakter olmalıdır",
+            "invalidFormat": "Renk hex formatında olmalıdır (#RRGGBB)"
+          }
+        }
+      },
+      "actions": {
+        "create": "Ekle",
+        "creating": "Ekleniyor...",
+        "update": "Güncelle",
+        "updating": "Güncelleniyor...",
+        "delete": "Sil",
+        "deleting": "Siliniyor...",
+        "edit": "Düzenle",
+        "cancel": "İptal"
+      },
+      "messages": {
+        "createSuccess": "Kategori başarıyla oluşturuldu",
+        "updateSuccess": "Kategori başarıyla güncellendi",
+        "deleteSuccess": "Kategori başarıyla silindi"
+      }
+    },
+    "todoItems": {
+      "columns": {
+        "backlog": "Beklemede",
+        "inProgress": "Devam Ediyor",
+        "blocked": "Engel",
+        "completed": "Tamamlandı"
+      },
+      "priority": {
+        "low": "Düşük",
+        "medium": "Orta",
+        "high": "Yüksek"
+      },
+      "filters": {
+        "all": "Tümü",
+        "active": "Aktif",
+        "archived": "Arşivlenmiş"
+      },
+      "table": {
+        "title": "Başlık",
+        "status": "Durum",
+        "priority": "Öncelik",
+        "category": "Kategori",
+        "dueDate": "Bitiş Tarihi",
+        "actions": "İşlemler",
+        "noTasks": "Görev bulunamadı",
+        "search": "Arama sonucu bulunamadı",
+        "searchPlaceholder": "Görev ara..."
+      },
+      "dropZone": {
+        "dropZone": "Bırakma alanı",
+        "dropHere": "Buraya bırak"
+      },
+      "listView": {
+        "comingSoon": "Liste görünümü yakında..."
+      },
+      "modals": {
+        "create": {
+          "title": "Yeni Görev Ekle"
+        },
+        "update": {
+          "title": "Görevi Güncelle"
+        }
+      },
+      "forms": {
+        "title": {
+          "label": "Başlık",
+          "placeholder": "Görev başlığını girin",
+          "errors": {
+            "required": "Başlık gereklidir",
+            "maxlength": "Başlık en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "description": {
+          "label": "Açıklama",
+          "placeholder": "Görev açıklamasını girin",
+          "errors": {
+            "maxlength": "Açıklama en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "status": {
+          "label": "Durum",
+          "errors": {
+            "invalid": "Geçersiz durum"
+          }
+        },
+        "priority": {
+          "label": "Öncelik",
+          "errors": {
+            "invalid": "Geçersiz öncelik"
+          }
+        },
+        "dueDate": {
+          "label": "Bitiş Tarihi",
+          "placeholder": "Bitiş tarihi seçin",
+          "errors": {
+            "invalid": "Geçersiz tarih formatı"
+          }
+        },
+        "categoryId": {
+          "label": "Kategori",
+          "placeholder": "Kategori seçin",
+          "errors": {
+            "required": "Kategori gereklidir"
+          }
+        }
+      },
+      "actions": {
+        "addTask": "Görev Ekle",
+        "archiveAll": "Tümünü Arşivle",
+        "create": "Ekle",
+        "creating": "Ekleniyor...",
+        "update": "Güncelle",
+        "updating": "Güncelleniyor...",
+        "delete": "Sil",
+        "deleting": "Siliniyor...",
+        "edit": "Düzenle",
+        "cancel": "İptal"
+      },
+      "tabs": {
+        "detail": "Detay",
+        "comment": "Yorum",
+        "activity": "Aktivite"
+      },
+      "messages": {
+        "createSuccess": "Görev başarıyla oluşturuldu",
+        "updateSuccess": "Görev başarıyla güncellendi",
+        "archiveSuccess": "Görev başarıyla arşivlendi",
+        "archiveAllSuccess": "Tüm tamamlanan görevler başarıyla arşivlendi"
+      }
+    },
+    "todoComments": {
+      "forms": {
+        "comment": {
+          "placeholder": "Yorum yazın..."
+        }
+      },
+      "messages": {
+        "createSuccess": "Yorum başarıyla eklendi",
+        "loading": "Yorumlar yükleniyor...",
+        "noComments": "Henüz yorum yok. İlk yorumu siz yapın!"
+      }
+    },
+    "activityLogs": {
+      "you": "Siz",
+      "user": "Kullanıcı",
+      "notSet": "Belirtilmemiş",
+      "time": {
+        "justNow": "Az önce",
+        "minutesAgo": "{{count}} dakika önce",
+        "hoursAgo": "{{count}} saat önce",
+        "yesterday": "Dün, {{time}}",
+        "daysAgo": "{{count}} gün önce"
+      },
+      "messages": {
+        "loading": "Aktiviteler yükleniyor...",
+        "noActivities": "Henüz aktivite yok",
+        "todoItemCreated": "{{user}} bu görevi {{status}} durumuyla oluşturdu",
+        "titleChanged": "{{user}} başlığı \"{{oldValue}}\" değerinden \"{{newValue}}\" değerine değiştirdi",
+        "descriptionChanged": "{{user}} açıklamayı güncelledi",
+        "statusChanged": "{{user}} durumu {{oldStatus}} değerinden {{newStatus}} değerine değiştirdi",
+        "priorityChanged": "{{user}} önceliği {{oldPriority}} değerinden {{newPriority}} değerine değiştirdi",
+        "dueDateChanged": "{{user}} bitiş tarihini {{oldDate}} değerinden {{newDate}} değerine değiştirdi",
+        "categoryChanged": "{{user}} kategoriyi değiştirdi",
+        "todoItemArchived": "{{user}} bu görevi arşivledi",
+        "todoItemDeleted": "{{user}} bu görevi sildi",
+        "commentCreated": "{{user}} bir yorum ekledi",
+        "unknownAction": "{{user}} bir işlem gerçekleştirdi: {{actionKey}}"
+      }
+    },
+    "users": {
+      "table": {
+        "name": "Ad Soyad",
+        "email": "E-posta",
+        "phoneNumber": "Telefon",
+        "status": "Durum",
+        "actions": "İşlemler",
+        "verified": "Doğrulanmış",
+        "noUsers": "Kullanıcı bulunamadı",
+        "search": "Arama sonucu bulunamadı",
+        "searchPlaceholder": "Kullanıcı ara..."
+      },
+      "status": {
+        "active": "Aktif",
+        "inactive": "Pasif",
+        "locked": "Kilitli"
+      },
+      "filters": {
+        "all": "Tümü",
+        "active": "Aktif",
+        "inactive": "Pasif"
+      },
+      "modals": {
+        "create": {
+          "title": "Yeni Kullanıcı Ekle"
+        },
+        "update": {
+          "title": "Kullanıcıyı Güncelle"
+        },
+        "delete": {
+          "title": "Kullanıcıyı Sil",
+          "message": "{{userEmail}} e-posta adresli kullanıcıyı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+        },
+        "roles": {
+          "title": "Rolleri Yönet - {{user}}",
+          "description": "Kullanıcı için rolleri seçin veya kaldırın. Seçili roller kullanıcının sahip olduğu yetkileri belirler.",
+          "totalRoles": "Toplam Roller",
+          "selected": "seçildi"
+        },
+        "resetPassword": {
+          "title": "Şifre Sıfırla - {{user}}",
+          "description": "Kullanıcının şifresini yeni bir şifre ile sıfırlayın."
+        }
+      },
+      "forms": {
+        "email": {
+          "label": "E-posta",
+          "placeholder": "E-posta adresini girin",
+          "errors": {
+            "required": "E-posta adresi zorunludur",
+            "invalid": "Lütfen geçerli bir e-posta adresi girin",
+            "maxlength": "E-posta adresi en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "password": {
+          "label": "Şifre",
+          "placeholder": "Şifreyi girin",
+          "errors": {
+            "minlength": "Şifre en az {{min}} karakter olmalıdır",
+            "maxlength": "Şifre en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "confirmPassword": {
+          "label": "Şifre Tekrar",
+          "placeholder": "Şifreyi tekrar girin",
+          "errors": {
+            "required": "Şifre tekrar zorunludur",
+            "mismatch": "Şifreler eşleşmiyor"
+          }
+        },
+        "firstName": {
+          "label": "Ad",
+          "placeholder": "Adı girin",
+          "errors": {
+            "maxlength": "Ad en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "lastName": {
+          "label": "Soyad",
+          "placeholder": "Soyadı girin",
+          "errors": {
+            "maxlength": "Soyad en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "phoneNumber": {
+          "label": "Telefon Numarası",
+          "placeholder": "Telefon numarasını girin",
+          "errors": {
+            "invalid": "Lütfen geçerli bir telefon numarası girin",
+            "maxlength": "Telefon numarası en fazla {{max}} karakter olmalıdır"
+          }
+        },
+        "isActive": {
+          "label": "Aktif"
+        },
+        "emailConfirmed": {
+          "label": "E-posta Doğrulandı"
+        },
+        "phoneNumberConfirmed": {
+          "label": "Telefon Doğrulandı"
+        },
+        "twoFactorEnabled": {
+          "label": "İki Faktörlü Doğrulama"
+        }
+      },
+      "actions": {
+        "create": "Ekle",
+        "creating": "Ekleniyor...",
+        "edit": "Düzenle",
+        "update": "Güncelle",
+        "updating": "Güncelleniyor...",
+        "delete": "Sil",
+        "deleting": "Siliniyor...",
+        "save": "Kaydet",
+        "saving": "Kaydediliyor...",
+        "cancel": "İptal",
+        "manageRoles": "Rolleri Yönet",
+        "lock": "Kilitle",
+        "unlock": "Kilidi Aç",
+        "resetPassword": "Şifre Sıfırla"
+      },
+      "messages": {
+        "createSuccess": "Kullanıcı başarıyla oluşturuldu",
+        "updateSuccess": "Kullanıcı başarıyla güncellendi",
+        "deleteSuccess": "Kullanıcı başarıyla silindi",
+        "rolesUpdated": "Roller başarıyla güncellendi",
+        "passwordReset": "Şifre başarıyla sıfırlandı",
+        "userLocked": "Kullanıcı başarıyla kilitlendi",
+        "userUnlocked": "Kullanıcı başarıyla kilidi açıldı"
+      }
+    },
+    "reports": {
+      "title": "Dashboard Raporları",
+      "subtitle": "Görev yönetiminiz hakkında kapsamlı içgörüler",
+      "dateFilter": {
+        "title": "Tarih Aralığı Filtresi",
+        "startDate": "Başlangıç Tarihi",
+        "endDate": "Bitiş Tarihi",
+        "customRangeHint": "Tarih seçildiğinde özel tarih aralığı otomatik olarak uygulanır"
+      },
+      "dateRange": {
+        "today": "Bugün",
+        "thisWeek": "Bu Hafta",
+        "thisMonth": "Bu Ay",
+        "last30Days": "Son 30 Gün",
+        "custom": "Özel Aralık",
+        "allTime": "Tüm Zamanlar"
+      },
+      "summary": {
+        "totalTasks": "Toplam Görev",
+        "activeTasks": "Aktif Görevler",
+        "completedTasks": "Tamamlanan Görevler",
+        "overdueTasks": "Geciken Görevler",
+        "blockedTasks": "Engellenen Görevler"
+      },
+      "charts": {
+        "statusDistribution": "Durum Dağılımı",
+        "priorityDistribution": "Öncelik Dağılımı",
+        "categoryDistribution": "Kategori Dağılımı",
+        "trendData": "Görev Trendleri",
+        "created": "Oluşturulan",
+        "completed": "Tamamlanan",
+        "noData": "Veri bulunamadı"
+      },
+      "widgets": {
+        "completionRate": "Tamamlanma Oranı",
+        "overallCompletionRate": "Genel",
+        "monthlyCompletionRate": "Bu Ay",
+        "upcomingTasks": "Yaklaşan Görevler",
+        "today": "Bugün",
+        "thisWeek": "Bu Hafta",
+        "noUpcomingTasks": "Yaklaşan görev yok",
+        "andMore": "+{{count}} daha fazla",
+        "activitySummary": "Aktivite Özeti",
+        "totalComments": "Toplam Yorum",
+        "recentActivities": "Son Aktiviteler",
+        "mostActiveCategory": "En Aktif Kategori",
+        "tasks": "görev"
+      }
+    },
+    "profile": {
+      "modals": {
+        "changePassword": {
+          "title": "Şifre Değiştir"
+        }
+      },
+      "forms": {
+        "oldPassword": {
+          "label": "Mevcut Şifre",
+          "placeholder": "Mevcut şifrenizi girin"
+        },
+        "newPassword": {
+          "label": "Yeni Şifre",
+          "placeholder": "Yeni şifrenizi girin"
+        },
+        "confirmNewPassword": {
+          "label": "Yeni Şifreyi Onayla",
+          "placeholder": "Yeni şifrenizi onaylayın"
+        }
+      },
+      "actions": {
+        "cancel": "İptal",
+        "changePassword": "Şifre Değiştir",
+        "changing": "Değiştiriliyor..."
+      },
+      "messages": {
+        "changePasswordSuccess": "Şifre başarıyla değiştirildi",
+        "changePasswordError": "Şifre değiştirilemedi"
+      }
+    }
+  },
+  "validation": {
+    "oldPassword": {
+      "required": "Mevcut şifre gereklidir"
+    },
+    "newPassword": {
+      "required": "Yeni şifre gereklidir"
+    },
+    "confirmPassword": {
+      "required": "Lütfen yeni şifrenizi onaylayın",
+      "mismatch": "Şifreler eşleşmiyor"
+    },
+    "password": {
+      "minLength": "Şifre en az {{min}} karakter olmalıdır",
+      "maxLength": "Şifre en fazla {{max}} karakter olmalıdır"
+    }
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir hata oluştu"
+  }
+}

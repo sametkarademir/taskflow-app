@@ -1,0 +1,784 @@
+{
+  "components": {
+    "layouts": {
+      "auth": {
+        "labels": {
+          "badge": "TaskFlow Panel",
+          "title": "Streamline your day, manage your tasks smartly.",
+          "subtitle": "Track, prioritize, and complete your team's tasks from a single panel with TaskFlow. A minimal, focused, and fully dark interface.",
+          "highlightTitle": "Real-time task tracking",
+          "highlightDescription": "Panels, filters, and detailed task views."
+        }
+      },
+      "dashboard": {
+        "header": {
+          "actions": {
+            "newTask": "New Task"
+          },
+          "search": {
+            "placeholder": "Search tasks..."
+          }
+        },
+        "sidebar": {
+          "navigation": {
+            "home": "Dashboard",
+            "tasks": "My Tasks",
+            "calendar": "Calendar",
+            "categories": "Categories",
+            "roles": "Roles",
+            "users": "Users"
+          }
+        },
+        "userProfileDropdown": {
+          "changePassword": "Change Password",
+          "logout": "Logout"
+        }
+      }
+    },
+    "pagination": {
+      "labels": {
+        "total": "<strong>{{length}}</strong> records found",
+        "page": "Page"
+      }
+    }
+  },
+  "pages": {
+    "login": {
+      "labels": {
+        "title": "Welcome Back",
+        "description": "Sign in to your account to continue",
+        "registerText": "Don't have an account?"
+      },
+      "actions": {
+        "login": "Sign In",
+        "register": "Sign up",
+        "forgotPassword": "Forgot your password?"
+      },
+      "forms": {
+        "email": {
+          "label": "Email",
+          "placeholder": "example@taskflow.app",
+          "errors": {
+            "required": "Email is required",
+            "invalid": "Please enter a valid email address",
+            "maxlength": "Email must be at most {{max}} characters"
+          }
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "••••••••",
+          "errors": {
+            "required": "Password is required",
+            "minlength": "Password must be at least {{min}} characters",
+            "maxlength": "Password must be at most {{max}} characters"
+          }
+        }
+      }
+    },
+    "register": {
+      "labels": {
+        "title": "Create Account",
+        "description": "Sign up to get started with TaskFlow",
+        "loginText": "Already have an account?"
+      },
+      "actions": {
+        "register": "Sign Up",
+        "login": "Sign In"
+      },
+      "forms": {
+        "firstName": {
+          "label": "First Name",
+          "placeholder": "Enter your first name",
+          "errors": {
+            "required": "First name is required",
+            "maxlength": "First name must be at most {{max}} characters"
+          }
+        },
+        "lastName": {
+          "label": "Last Name",
+          "placeholder": "Enter your last name",
+          "errors": {
+            "required": "Last name is required",
+            "maxlength": "Last name must be at most {{max}} characters"
+          }
+        },
+        "phoneNumber": {
+          "label": "Phone Number",
+          "placeholder": "Enter your phone number",
+          "errors": {
+            "maxlength": "Phone number must be at most {{max}} characters"
+          }
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "errors": {
+            "required": "Email is required",
+            "invalid": "Please enter a valid email address",
+            "maxlength": "Email must be at most {{max}} characters"
+          }
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter your password",
+          "errors": {
+            "required": "Password is required",
+            "minlength": "Password must be at least {{min}} characters",
+            "maxlength": "Password must be at most {{max}} characters"
+          }
+        },
+        "confirmPassword": {
+          "label": "Confirm Password",
+          "placeholder": "Confirm your password",
+          "errors": {
+            "required": "Please confirm your password",
+            "match": "Passwords do not match"
+          }
+        }
+      }
+    },
+    "confirmEmail": {
+      "labels": {
+        "title": "Verify Your Email",
+        "description": "We've sent a 6-digit verification code to {{email}}",
+        "resendText": "Didn't receive the code?"
+      },
+      "actions": {
+        "verify": "Verify Email",
+        "resend": "Resend Code"
+      },
+      "forms": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "errors": {
+            "required": "Email is required",
+            "invalid": "Please enter a valid email address",
+            "maxlength": "Email must be at most {{max}} characters"
+          }
+        },
+        "code": {
+          "label": "Verification Code",
+          "placeholder": "000000",
+          "hint": "Enter the 6-digit code sent to your email",
+          "errors": {
+            "required": "Verification code is required",
+            "length": "Code must be exactly {{length}} digits",
+            "numeric": "Code must contain only numbers"
+          }
+        }
+      },
+      "messages": {
+        "success": "Email verified successfully",
+        "resendSuccess": "Verification code has been resent to your email",
+        "invalidCode": "Invalid or expired verification code. {{remaining}} attempt(s) remaining.",
+        "noAttemptsLeft": "You have exceeded the maximum number of attempts. You can no longer verify the code. Please request a new verification code."
+      }
+    },
+    "forgotPassword": {
+      "labels": {
+        "title": "Forgot Password",
+        "description": "Enter your email address and we'll send you a code to reset your password",
+        "backToLogin": "Remember your password?"
+      },
+      "actions": {
+        "sendCode": "Send Reset Code",
+        "login": "Sign In"
+      },
+      "forms": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "errors": {
+            "required": "Email is required",
+            "invalid": "Please enter a valid email address"
+          }
+        }
+      }
+    },
+    "verifyResetCode": {
+      "labels": {
+        "title": "Verify Reset Code",
+        "description": "We've sent a 6-digit reset code to {{email}}"
+      },
+      "actions": {
+        "verify": "Verify Code"
+      },
+      "messages": {
+        "invalidCode": "Invalid or expired reset code. {{remaining}} attempt(s) remaining.",
+        "noAttemptsLeft": "You have exceeded the maximum number of attempts. You can no longer verify the code. Please request a new reset code."
+      },
+      "forms": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "errors": {
+            "required": "Email is required",
+            "invalid": "Please enter a valid email address",
+            "maxlength": "Email must be at most {{max}} characters"
+          }
+        },
+        "code": {
+          "label": "Reset Code",
+          "placeholder": "000000",
+          "hint": "Enter the 6-digit code sent to your email",
+          "errors": {
+            "required": "Reset code is required",
+            "length": "Code must be exactly {{length}} digits",
+            "numeric": "Code must contain only numbers"
+          }
+        }
+      }
+    },
+    "resetPassword": {
+      "labels": {
+        "title": "Reset Password",
+        "description": "Enter your new password below",
+        "backToLogin": "Remember your password?"
+      },
+      "actions": {
+        "reset": "Reset Password",
+        "login": "Sign In"
+      },
+      "forms": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email",
+          "errors": {
+            "required": "Email is required",
+            "invalid": "Please enter a valid email address",
+            "maxlength": "Email must be at most {{max}} characters"
+          }
+        },
+        "newPassword": {
+          "label": "New Password",
+          "placeholder": "Enter your new password",
+          "errors": {
+            "required": "New password is required",
+            "minlength": "Password must be at least {{min}} characters",
+            "maxlength": "Password must be at most {{max}} characters"
+          }
+        },
+        "confirmNewPassword": {
+          "label": "Confirm New Password",
+          "placeholder": "Confirm your new password",
+          "errors": {
+            "required": "Please confirm your new password",
+            "match": "Passwords do not match"
+          }
+        }
+      },
+      "messages": {
+        "success": "Password reset successfully. Please login with your new password."
+      }
+    },
+    "roles": {
+      "table": {
+        "name": "Role Name",
+        "description": "Description",
+        "actions": "Actions",
+        "noRoles": "No roles found",
+        "search": "No search results found",
+        "searchPlaceholder": "Search roles..."
+      },
+      "modals": {
+        "create": {
+          "title": "Create New Role"
+        },
+        "update": {
+          "title": "Update Role"
+        },
+        "delete": {
+          "title": "Delete Role",
+          "message": "Are you sure you want to delete the role {{roleName}}? This action cannot be undone."
+        },
+        "permissions": {
+          "title": "Manage Permissions - {{role}}",
+          "description": "Select or remove permissions for the role. Selected permissions determine the role's access rights.",
+          "totalPermissions": "Total Permissions",
+          "selected": "selected"
+        }
+      },
+      "forms": {
+        "name": {
+          "label": "Role Name",
+          "placeholder": "Enter role name",
+          "errors": {
+            "required": "Role name is required",
+            "maxlength": "Role name must be at most {{max}} characters"
+          }
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Enter role description",
+          "errors": {
+            "maxlength": "Description must be at most {{max}} characters"
+          }
+        }
+      },
+      "actions": {
+        "create": "Create",
+        "creating": "Creating...",
+        "update": "Update",
+        "updating": "Updating...",
+        "delete": "Delete",
+        "deleting": "Deleting...",
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel"
+      },
+      "messages": {
+        "createSuccess": "Role created successfully",
+        "updateSuccess": "Role updated successfully",
+        "deleteSuccess": "Role deleted successfully",
+        "permissionsUpdated": "Permissions updated successfully"
+      }
+    },
+    "categories": {
+      "table": {
+        "name": "Category Name",
+        "description": "Description",
+        "color": "Color",
+        "actions": "Actions",
+        "noCategories": "No categories found",
+        "search": "No search results found",
+        "searchPlaceholder": "Search categories..."
+      },
+      "modals": {
+        "create": {
+          "title": "Create New Category"
+        },
+        "update": {
+          "title": "Update Category"
+        },
+        "delete": {
+          "title": "Delete Category",
+          "message": "Are you sure you want to delete the category {{categoryName}}? This action cannot be undone."
+        }
+      },
+      "forms": {
+        "name": {
+          "label": "Category Name",
+          "placeholder": "Enter category name",
+          "errors": {
+            "required": "Category name is required",
+            "maxlength": "Category name must be at most {{max}} characters"
+          }
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Enter category description",
+          "errors": {
+            "maxlength": "Description must be at most {{max}} characters"
+          }
+        },
+        "colorHex": {
+          "label": "Color",
+          "placeholder": "#RRGGBB",
+          "selected": "Selected",
+          "errors": {
+            "maxlength": "Color must be at most {{max}} characters",
+            "invalidFormat": "Color must be in hex format (#RRGGBB)"
+          }
+        }
+      },
+      "actions": {
+        "create": "Create",
+        "creating": "Creating...",
+        "update": "Update",
+        "updating": "Updating...",
+        "delete": "Delete",
+        "deleting": "Deleting...",
+        "edit": "Edit",
+        "cancel": "Cancel"
+      },
+      "messages": {
+        "createSuccess": "Category created successfully",
+        "updateSuccess": "Category updated successfully",
+        "deleteSuccess": "Category deleted successfully"
+      }
+    },
+    "todoItems": {
+      "columns": {
+        "backlog": "Backlog",
+        "inProgress": "In Progress",
+        "blocked": "Blocked",
+        "completed": "Completed"
+      },
+      "priority": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      },
+      "filters": {
+        "all": "All",
+        "active": "Active",
+        "archived": "Archived"
+      },
+      "table": {
+        "title": "Title",
+        "status": "Status",
+        "priority": "Priority",
+        "category": "Category",
+        "dueDate": "Due Date",
+        "actions": "Actions",
+        "noTasks": "No tasks found",
+        "search": "No search results found",
+        "searchPlaceholder": "Search tasks..."
+      },
+      "dropZone": {
+        "dropZone": "Drop zone",
+        "dropHere": "Drop here"
+      },
+      "listView": {
+        "comingSoon": "List view coming soon..."
+      },
+      "modals": {
+        "create": {
+          "title": "Create New Task"
+        },
+        "update": {
+          "title": "Update Task"
+        }
+      },
+      "forms": {
+        "title": {
+          "label": "Title",
+          "placeholder": "Enter task title",
+          "errors": {
+            "required": "Title is required",
+            "maxlength": "Title must be at most {{max}} characters"
+          }
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Enter task description",
+          "errors": {
+            "maxlength": "Description must be at most {{max}} characters"
+          }
+        },
+        "status": {
+          "label": "Status",
+          "errors": {
+            "invalid": "Invalid status"
+          }
+        },
+        "priority": {
+          "label": "Priority",
+          "errors": {
+            "invalid": "Invalid priority"
+          }
+        },
+        "dueDate": {
+          "label": "Due Date",
+          "placeholder": "Select due date",
+          "errors": {
+            "invalid": "Invalid date format"
+          }
+        },
+        "categoryId": {
+          "label": "Category",
+          "placeholder": "Select category",
+          "errors": {
+            "required": "Category is required"
+          }
+        }
+      },
+      "actions": {
+        "addTask": "Add Task",
+        "archiveAll": "Archive All",
+        "create": "Create",
+        "creating": "Creating...",
+        "update": "Update",
+        "updating": "Updating...",
+        "delete": "Delete",
+        "deleting": "Deleting...",
+        "edit": "Edit",
+        "cancel": "Cancel"
+      },
+      "tabs": {
+        "detail": "Detail",
+        "comment": "Comment",
+        "activity": "Activity"
+      },
+      "messages": {
+        "createSuccess": "Task created successfully",
+        "updateSuccess": "Task updated successfully",
+        "archiveSuccess": "Task archived successfully",
+        "archiveAllSuccess": "All completed tasks archived successfully"
+      }
+    },
+    "todoComments": {
+      "forms": {
+        "comment": {
+          "placeholder": "Write a comment..."
+        }
+      },
+      "messages": {
+        "createSuccess": "Comment added successfully",
+        "loading": "Loading comments...",
+        "noComments": "No comments yet. Be the first to comment!"
+      }
+    },
+    "activityLogs": {
+      "you": "You",
+      "user": "User",
+      "notSet": "Not set",
+      "time": {
+        "justNow": "Just now",
+        "minutesAgo": "{{count}} minute ago",
+        "minutesAgo_plural": "{{count}} minutes ago",
+        "hoursAgo": "{{count}} hour ago",
+        "hoursAgo_plural": "{{count}} hours ago",
+        "yesterday": "Yesterday, {{time}}",
+        "daysAgo": "{{count}} day ago",
+        "daysAgo_plural": "{{count}} days ago"
+      },
+      "messages": {
+        "loading": "Loading activities...",
+        "noActivities": "No activities yet",
+        "todoItemCreated": "created this task with status",
+        "titleChanged": "changed the title from \"{{oldValue}}\" to \"{{newValue}}\"",
+        "descriptionChanged": "updated the description",
+        "statusChanged": "changed the status from {{oldStatus}} to",
+        "priorityChanged": "changed the priority from {{oldPriority}} to {{newPriority}}",
+        "dueDateChanged": "changed the due date from {{oldDate}} to {{newDate}}",
+        "categoryChanged": "changed the category",
+        "todoItemArchived": "archived this task",
+        "todoItemDeleted": "deleted this task",
+        "commentCreated": "added a comment",
+        "unknownAction": "performed an action: {{actionKey}}"
+      }
+    },
+    "users": {
+      "table": {
+        "name": "Name",
+        "email": "Email",
+        "phoneNumber": "Phone",
+        "status": "Status",
+        "actions": "Actions",
+        "verified": "Verified",
+        "noUsers": "No users found",
+        "search": "No search results found",
+        "searchPlaceholder": "Search users..."
+      },
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive",
+        "locked": "Locked"
+      },
+      "filters": {
+        "all": "All",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "modals": {
+        "create": {
+          "title": "Add New User"
+        },
+        "update": {
+          "title": "Update User"
+        },
+        "delete": {
+          "title": "Delete User",
+          "message": "Are you sure you want to delete the user with email {{userEmail}}? This action cannot be undone."
+        },
+        "roles": {
+          "title": "Manage Roles - {{user}}",
+          "description": "Select or remove roles for the user. Selected roles determine the user's access rights.",
+          "totalRoles": "Total Roles",
+          "selected": "selected"
+        },
+        "resetPassword": {
+          "title": "Reset Password - {{user}}",
+          "description": "Reset the user's password with a new password."
+        }
+      },
+      "forms": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter email address",
+          "errors": {
+            "required": "Email address is required",
+            "invalid": "Please enter a valid email address",
+            "maxlength": "Email address must be at most {{max}} characters"
+          }
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Enter password",
+          "errors": {
+            "minlength": "Password must be at least {{min}} characters",
+            "maxlength": "Password must be at most {{max}} characters"
+          }
+        },
+        "confirmPassword": {
+          "label": "Confirm Password",
+          "placeholder": "Re-enter password",
+          "errors": {
+            "required": "Confirm password is required",
+            "mismatch": "Passwords do not match"
+          }
+        },
+        "firstName": {
+          "label": "First Name",
+          "placeholder": "Enter first name",
+          "errors": {
+            "maxlength": "First name must be at most {{max}} characters"
+          }
+        },
+        "lastName": {
+          "label": "Last Name",
+          "placeholder": "Enter last name",
+          "errors": {
+            "maxlength": "Last name must be at most {{max}} characters"
+          }
+        },
+        "phoneNumber": {
+          "label": "Phone Number",
+          "placeholder": "Enter phone number",
+          "errors": {
+            "invalid": "Please enter a valid phone number",
+            "maxlength": "Phone number must be at most {{max}} characters"
+          }
+        },
+        "isActive": {
+          "label": "Active"
+        },
+        "emailConfirmed": {
+          "label": "Email Confirmed"
+        },
+        "phoneNumberConfirmed": {
+          "label": "Phone Confirmed"
+        },
+        "twoFactorEnabled": {
+          "label": "Two Factor Authentication"
+        }
+      },
+      "actions": {
+        "create": "Create",
+        "creating": "Creating...",
+        "edit": "Edit",
+        "update": "Update",
+        "updating": "Updating...",
+        "delete": "Delete",
+        "deleting": "Deleting...",
+        "save": "Save",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "manageRoles": "Manage Roles",
+        "lock": "Lock",
+        "unlock": "Unlock",
+        "resetPassword": "Reset Password"
+      },
+      "messages": {
+        "createSuccess": "User created successfully",
+        "updateSuccess": "User updated successfully",
+        "deleteSuccess": "User deleted successfully",
+        "rolesUpdated": "Roles updated successfully",
+        "passwordReset": "Password reset successfully",
+        "userLocked": "User locked successfully",
+        "userUnlocked": "User unlocked successfully"
+      }
+    },
+    "reports": {
+      "title": "Dashboard Reports",
+      "subtitle": "Comprehensive insights into your task management",
+      "dateFilter": {
+        "title": "Date Range Filter",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "customRangeHint": "Custom date range is automatically applied when dates are selected"
+      },
+      "dateRange": {
+        "today": "Today",
+        "thisWeek": "This Week",
+        "thisMonth": "This Month",
+        "last30Days": "Last 30 Days",
+        "custom": "Custom Range",
+        "allTime": "All Time"
+      },
+      "summary": {
+        "totalTasks": "Total Tasks",
+        "activeTasks": "Active Tasks",
+        "completedTasks": "Completed Tasks",
+        "overdueTasks": "Overdue Tasks",
+        "blockedTasks": "Blocked Tasks"
+      },
+      "charts": {
+        "statusDistribution": "Status Distribution",
+        "priorityDistribution": "Priority Distribution",
+        "categoryDistribution": "Category Distribution",
+        "trendData": "Task Trends",
+        "created": "Created",
+        "completed": "Completed",
+        "noData": "No data available"
+      },
+      "widgets": {
+        "completionRate": "Completion Rate",
+        "overallCompletionRate": "Overall",
+        "monthlyCompletionRate": "This Month",
+        "upcomingTasks": "Upcoming Tasks",
+        "today": "Today",
+        "thisWeek": "This Week",
+        "noUpcomingTasks": "No upcoming tasks",
+        "andMore": "+{{count}} more",
+        "activitySummary": "Activity Summary",
+        "totalComments": "Total Comments",
+        "recentActivities": "Recent Activities",
+        "mostActiveCategory": "Most Active Category",
+        "tasks": "tasks"
+      }
+    },
+    "profile": {
+      "modals": {
+        "changePassword": {
+          "title": "Change Password"
+        }
+      },
+      "forms": {
+        "oldPassword": {
+          "label": "Current Password",
+          "placeholder": "Enter your current password"
+        },
+        "newPassword": {
+          "label": "New Password",
+          "placeholder": "Enter your new password"
+        },
+        "confirmNewPassword": {
+          "label": "Confirm New Password",
+          "placeholder": "Confirm your new password"
+        }
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "changePassword": "Change Password",
+        "changing": "Changing..."
+      },
+      "messages": {
+        "changePasswordSuccess": "Password changed successfully",
+        "changePasswordError": "Failed to change password"
+      }
+    }
+  },
+  "validation": {
+    "oldPassword": {
+      "required": "Current password is required"
+    },
+    "newPassword": {
+      "required": "New password is required"
+    },
+    "confirmPassword": {
+      "required": "Please confirm your new password",
+      "mismatch": "Passwords do not match"
+    },
+    "password": {
+      "minLength": "Password must be at least {{min}} characters",
+      "maxLength": "Password must be at most {{max}} characters"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred"
+  }
+}

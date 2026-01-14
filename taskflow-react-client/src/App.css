@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+/* Scrollbar Styles - Global */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thumb-zinc-600::-webkit-scrollbar-thumb {
+  background-color: #52525b;
+  border-radius: 4px;
+}
+
+.scrollbar-thumb-zinc-600::-webkit-scrollbar-thumb:hover {
+  background-color: #71717a;
+}
+
+.hover\:scrollbar-thumb-zinc-500:hover::-webkit-scrollbar-thumb {
+  background-color: #71717a;
+}
+
+.scrollbar-track-transparent::-webkit-scrollbar-track {
+  background-color: transparent;
+}

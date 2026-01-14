@@ -1,0 +1,610 @@
+# FlowDo React Client - Cursor Rules
+
+## Project Architecture
+
+This project follows a **feature-based architecture** with the following structure:
+
+1. **Features**: Feature-based modules (auth, users, todos, roles, etc.)
+2. **Components**: Reusable UI components (form, ui, layout, guards)
+3. **Contexts**: React Context providers (userContext, sidebarContext)
+4. **Pages**: Route-level page components
+5. **Common**: Shared utilities, helpers, hooks, and types
+
+## Technology Stack
+
+- **React 19** with TypeScript
+- **Vite** as build tool
+- **React Router DOM** for routing
+- **TanStack Query (React Query)** for data fetching and state management
+- **React Hook Form** with **Zod** for form validation
+- **Axios** for HTTP requests
+- **i18next** for internationalization
+- **Tailwind CSS** for styling
+- **Lucide React** for icons
+- **React Toastify** for notifications
+
+## Naming Conventions
+
+### Files and Folders
+- Use **kebab-case** for folder names (e.g., `forgot-password`, `user-profile`)
+- Use **PascalCase** for component files (e.g., `CreateUserModal.tsx`, `AuthGuard.tsx`)
+- Use **camelCase** for utility/hook files (e.g., `useLogin.ts`, `axios.ts`)
+- Use **camelCase** for type files (e.g., `loginRequestDto.ts`, `userResponseDto.ts`)
+
+### Components
+- **Component names**: PascalCase (e.g., `CreateUserModal`, `DataTable`, `AuthGuard`)
+- **Component files**: `index.tsx` for single component, or `{ComponentName}.tsx`
+- **Export pattern**: Named exports preferred, default export for pages
+
+### Hooks
+- **Hook names**: `use{Action}{Entity}` (e.g., `useLogin`, `useCreateUser`, `useGetPageableAndFilterUsers`)
+- **Hook files**: `use{Action}{Entity}.ts`
+- **Custom hooks**: Always start with `use` prefix
+
+### Services
+- **Service functions**: `{action}{Entity}Async` (e.g., `loginAsync`, `createUserAsync`, `getPageableAndFilterUsersAsync`)
+- **Service files**: `{entity}Service.ts` (e.g., `authService.ts`, `userService.ts`)
+- **Route constants**: `{entity}Route = "/api/v1/{entity-name}"`
+
+### Types
+- **Request DTOs**: `{Action}{Entity}RequestDto` (e.g., `LoginRequestDto`, `CreateUserRequestDto`)
+- **Response DTOs**: `{Entity}ResponseDto` (e.g., `UserResponseDto`, `TodoResponseDto`)
+- **Form Types**: `{Action}{Entity}FormType` (e.g., `LoginFormType`, `CreateUserFormType`)
+- **Type files**: `{typeName}.ts` (e.g., `loginRequestDto.ts`, `userResponseDto.ts`)
+
+### Schemas
+- **Schema factories**: `create{Action}{Entity}SchemaFactory` (e.g., `createLoginSchemaFactory`)
+- **Schema files**: `{action}{Entity}Schema.ts` (e.g., `loginSchema.ts`, `createUserSchema.ts`)
+- **Default values**: `DEFAULT_{ACTION}_{ENTITY}_FORM_VALUES` (e.g., `DEFAULT_LOGIN_FORM_VALUES`)
+
+## Folder Structure
+
+```
+src/
+├── assets/
+│   └── locales/
+│       ├── en/
+│       └── tr/
+├── components/
+│   ├── form/          # Form components (Input, Button, Label, Switch, etc.)
+│   ├── guards/        # Route guards (AuthGuard, RoleGuard)
+│   ├── layout/        # Layout components (AuthLayout, PanelLayout)
+│   └── ui/            # UI components (Table, Modal, Pagination, Badge, etc.)
+├── contexts/          # React Context providers
+├── features/          # Feature modules
+│   └── {feature}/
+│       ├── components/    # Feature-specific components
+│       ├── hooks/         # Feature-specific hooks
+│       ├── schemas/       # Zod validation schemas
+│       ├── services/     # API service functions
+│       ├── types/         # TypeScript types/DTOs
+│       └── index.ts       # Feature barrel exports
+├── pages/             # Page components
+│   ├── auth/
+│   └── panel/
+└── common/            # Shared utilities
+    ├── helpers/
+    ├── hooks/
+    └── types/
+```
+
+## Code Structure Patterns
+
+### Feature Module Pattern
+
+Each feature should have:
+- `components/` - Feature-specific components
+- `hooks/` - Custom hooks for data fetching/mutations
+- `schemas/` - Zod validation schemas
+- `services/` - API service functions
+- `types/` - TypeScript types and DTOs
+- `index.ts` - Barrel export file
+
+### Service Pattern
+
+```typescript
+// services/{entity}Service.ts
+import { apiClient } from "../../common/helpers";
+import type { {Entity}ResponseDto, Create{Entity}RequestDto } from "../types";
+
+const {entity}Route = "/api/v1/{entity-name}";
+
+export async function get{Entity}ByIdAsync(
+  id: string,
+): Promise<{Entity}ResponseDto> {
+  const response = await apiClient.get<{Entity}ResponseDto>(
+    `${{entity}Route}/${id}`,
+  );
+  return response.data;
+}
+
+export async function create{Entity}Async(
+  data: Create{Entity}RequestDto,
+): Promise<{Entity}ResponseDto> {
+  const response = await apiClient.post<{Entity}ResponseDto>({entity}Route, data);
+  return response.data;
+}
+```
+
+### Hook Pattern (Query)
+
+```typescript
+// hooks/useGet{Entity}ById.ts
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
+import { get{Entity}ByIdAsync } from "../services";
+import type { {Entity}ResponseDto } from "../types";
+
+type UseGet{Entity}ByIdOptionsType = Omit<
+  UseQueryOptions<{Entity}ResponseDto, Error>,
+  "queryKey" | "queryFn"
+>;
+
+export const useGet{Entity}ById = (
+  id: string,
+  options: UseGet{Entity}ByIdOptionsType = {},
+) => {
+  return useQuery<{Entity}ResponseDto, Error>({
+    queryKey: ["{entity}", id],
+    queryFn: async () => {
+      return await get{Entity}ByIdAsync(id);
+    },
+    enabled: !!id,
+    ...options,
+  });
+};
+```
+
+### Hook Pattern (Mutation)
+
+```typescript
+// hooks/useCreate{Entity}.ts
+import { useMutation, type UseMutationOptions } from "@tanstack/react-query";
+import { create{Entity}Async } from "../services";
+import type { Create{Entity}RequestDto, {Entity}ResponseDto } from "../types";
+
+type UseCreate{Entity}OptionsType = Omit<
+  UseMutationOptions<{Entity}ResponseDto, Error, Create{Entity}RequestDto>,
+  "mutationFn"
+>;
+
+export const useCreate{Entity} = (options: UseCreate{Entity}OptionsType = {}) => {
+  return useMutation<{Entity}ResponseDto, Error, Create{Entity}RequestDto>({
+    mutationFn: async (data: Create{Entity}RequestDto) => {
+      return await create{Entity}Async(data);
+    },
+    ...options,
+  });
+};
+```
+
+### Schema Pattern
+
+```typescript
+// schemas/{action}{Entity}Schema.ts
+import { z } from "zod";
+
+export const create{Action}{Entity}SchemaFactory = (
+  t: (key: string, options?: Record<string, unknown>) => string,
+) =>
+  z.object({
+    fieldName: z
+      .string()
+      .min(1, t("pages.{entity}.forms.fieldName.errors.required"))
+      .max(256, t("pages.{entity}.forms.fieldName.errors.maxlength", { max: 256 })),
+  });
+
+export type {Action}{Entity}FormType = z.infer<
+  ReturnType<typeof create{Action}{Entity}SchemaFactory>
+>;
+
+export const DEFAULT_{ACTION}_{ENTITY}_FORM_VALUES: {Action}{Entity}FormType = {
+  fieldName: "",
+};
+```
+
+### Component Pattern (Modal with Form)
+
+```typescript
+// components/{Action}{Entity}Modal.tsx
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useLocale, showToast } from "../../common";
+import { Modal } from "../../../components/ui/modal";
+import { Input } from "../../../components/form/input";
+import { Button } from "../../../components/form/button";
+import { use{Action}{Entity} } from "../hooks";
+import {
+  create{Action}{Entity}SchemaFactory,
+  type {Action}{Entity}FormType,
+  DEFAULT_{ACTION}_{ENTITY}_FORM_VALUES,
+} from "../schemas";
+
+interface {Action}{Entity}ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSuccess?: () => void;
+}
+
+export const {Action}{Entity}Modal = ({
+  isOpen,
+  onClose,
+  onSuccess,
+}: {Action}{Entity}ModalProps) => {
+  const { t } = useLocale();
+  const schema = create{Action}{Entity}SchemaFactory(t);
+
+  const form = useForm<{Action}{Entity}FormType>({
+    resolver: zodResolver(schema),
+    defaultValues: DEFAULT_{ACTION}_{ENTITY}_FORM_VALUES,
+    mode: "onBlur",
+    reValidateMode: "onBlur",
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = form;
+
+  const { mutate: {action}{Entity}, isPending } = use{Action}{Entity}({
+    onSuccess: () => {
+      showToast(t("pages.{entity}.messages.{action}Success"), "success");
+      reset();
+      onClose();
+      onSuccess?.();
+    },
+    onError: (error) => {
+      showToast(
+        error.message || t("pages.{entity}.messages.operationError"),
+        "error",
+      );
+    },
+  });
+
+  const onSubmit = (data: {Action}{Entity}FormType) => {
+    {action}{Entity}(data);
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
+      title={t("pages.{entity}.modals.{action}.title")}
+      size="lg"
+    >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 my-4">
+        {/* Form fields */}
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-zinc-800/50">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleClose}
+            disabled={isPending}
+          >
+            {t("pages.{entity}.actions.cancel")}
+          </Button>
+          <Button type="submit" variant="primary" loading={isPending}>
+            {isPending
+              ? t("pages.{entity}.actions.{action}ing")
+              : t("pages.{entity}.actions.{action}")}
+          </Button>
+        </div>
+      </form>
+    </Modal>
+  );
+};
+```
+
+### Page Pattern
+
+```typescript
+// pages/panel/{entity}/index.tsx
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "use-debounce";
+
+import { useLocale, showToast } from "../../../features/common";
+import {
+  useGetPageableAndFilter{Entity}s,
+  type {Entity}ResponseDto,
+  type GetList{Entity}sRequestDto,
+  {Action}{Entity}Modal,
+} from "../../../features/{entity}";
+
+import { DataTable, type TableColumn } from "../../../components/ui/table";
+import Pagination from "../../../components/ui/pagination";
+
+export const {Entity}sPage = () => {
+  const { t } = useLocale();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchTerm, setSearchTerm] = useState(
+    searchParams.get("search") || "",
+  );
+  const [debouncedSearch] = useDebounce(searchTerm, 600);
+
+  const params = useMemo(
+    () => ({
+      page: Number(searchParams.get("page")) || 1,
+      perPage: Number(searchParams.get("perPage")) || 10,
+      search: debouncedSearch || undefined,
+      field: searchParams.get("field") || null,
+      order: (searchParams.get("order") as "asc" | "desc") || null,
+    }),
+    [searchParams, debouncedSearch],
+  );
+
+  const { data: {entity}sData, isLoading, refetch } = useGetPageableAndFilter{Entity}s(params);
+
+  const updateParams = (newParams: Partial<GetList{Entity}sRequestDto>) => {
+    const updatedParams = new URLSearchParams(searchParams);
+    Object.entries(newParams).forEach(([key, value]) => {
+      if (value !== undefined && value !== null && value !== "") {
+        updatedParams.set(key, value.toString());
+      } else {
+        updatedParams.delete(key);
+      }
+    });
+    setSearchParams(updatedParams);
+  };
+
+  useEffect(() => {
+    updateParams({ search: debouncedSearch, page: 1 });
+  }, [debouncedSearch]);
+
+  const columns: TableColumn<{Entity}ResponseDto>[] = [
+    {
+      title: t("pages.{entity}.table.columnName"),
+      dataIndex: "fieldName",
+      sortable: true,
+      render: (value: string) => <p className="text-zinc-400">{value}</p>,
+    },
+  ];
+
+  return (
+    <div className="space-y-6">
+      {/* Header, Filters, Table, Pagination */}
+    </div>
+  );
+};
+```
+
+## Key Principles
+
+### 1. React Query Usage
+- Use `useQuery` for GET operations
+- Use `useMutation` for POST, PUT, PATCH, DELETE operations
+- Always provide proper `queryKey` arrays
+- Use `enabled` option for conditional queries
+- Use `refetch` from query hooks to refresh data after mutations
+
+### 2. Form Handling
+- Always use **React Hook Form** with **Zod** validation
+- Use `zodResolver` for form validation
+- Set `mode: "onBlur"` and `reValidateMode: "onBlur"` for better UX
+- Use schema factories that accept `t` function for localization
+- Always provide default values constants
+
+### 3. TypeScript
+- Use **interfaces** for component props
+- Use **types** for DTOs and complex types
+- Export types from `types/` folder
+- Use generic types for reusable components (e.g., `TableColumn<T>`)
+- Avoid `any` - use `unknown` or proper types
+
+### 4. API Client
+- Use `apiClient` from `common/helpers/axios.ts`
+- All API functions should be `async` and return typed promises
+- Use route constants for API endpoints
+- Handle errors in interceptors, not in individual calls
+
+### 5. Localization
+- Use `useLocale()` hook to get `t` function
+- Translation keys follow pattern: `pages.{page}.{section}.{key}`
+- Always use translation keys, never hardcode strings
+- Support both English (en) and Turkish (tr)
+
+### 6. Styling
+- Use **Tailwind CSS** utility classes
+- Follow dark theme pattern (zinc-900, zinc-800, zinc-700, etc.)
+- Use teal/emerald for primary colors
+- Use consistent spacing (space-y-6, gap-4, etc.)
+- Use `clsx` for conditional classes
+
+### 7. Component Organization
+- **Form components**: Reusable form inputs (Input, Button, Label, Switch, etc.)
+- **UI components**: Reusable UI elements (Table, Modal, Pagination, Badge, etc.)
+- **Layout components**: Page layouts (AuthLayout, PanelLayout)
+- **Guards**: Route protection components (AuthGuard, RoleGuard)
+- **Feature components**: Feature-specific components in feature folders
+
+### 8. State Management
+- Use **React Query** for server state
+- Use **React Context** for global client state (UserContext)
+- Use **local state** (useState) for component-specific state
+- Use **URL search params** for filter/pagination state
+
+### 9. Error Handling
+- Errors are handled in axios interceptors
+- Show toast notifications for errors
+- Use `showToast(message, "error")` for errors
+- Use `showToast(message, "success")` for success messages
+
+### 10. Routing
+- Use **React Router DOM** v7
+- Use `AuthGuard` for protected routes
+- Use `RoleGuard` for role-based access
+- Use nested routes with layout components
+
+### 11. Debouncing
+- Use `use-debounce` for search inputs
+- Default debounce delay: 600ms
+- Apply debounce to search terms before API calls
+
+### 12. Pagination
+- Use URL search params for pagination state
+- Use `PagedResult<T>` type from common types
+- Use `Pagination` component for UI
+- Reset to page 1 when filters change
+
+## Common Patterns
+
+### Query with Pagination
+
+```typescript
+const params = useMemo(
+  () => ({
+    page: Number(searchParams.get("page")) || 1,
+    perPage: Number(searchParams.get("perPage")) || 10,
+    search: debouncedSearch || undefined,
+    field: searchParams.get("field") || null,
+    order: (searchParams.get("order") as "asc" | "desc") || null,
+  }),
+  [searchParams, debouncedSearch],
+);
+
+const { data, isLoading, refetch } = useGetPageableAndFilter{Entity}s(params);
+```
+
+### Mutation with Success/Error Handling
+
+```typescript
+const { mutate: create{Entity}, isPending } = useCreate{Entity}({
+  onSuccess: () => {
+    showToast(t("pages.{entity}.messages.createSuccess"), "success");
+    refetch(); // Refresh list
+  },
+  onError: (error) => {
+    showToast(
+      error.message || t("pages.{entity}.messages.operationError"),
+      "error",
+    );
+  },
+});
+```
+
+### Modal State Management
+
+```typescript
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [selectedId, setSelectedId] = useState<string | null>(null);
+
+const handleOpen = (id: string) => {
+  setSelectedId(id);
+  setIsModalOpen(true);
+};
+
+const handleClose = () => {
+  setIsModalOpen(false);
+  setSelectedId(null);
+};
+```
+
+### Table Column Definition
+
+```typescript
+const columns: TableColumn<{Entity}ResponseDto>[] = [
+  {
+    title: t("pages.{entity}.table.columnName"),
+    dataIndex: "fieldName",
+    sortable: true,
+    width: "20%",
+    render: (value: string, record: {Entity}ResponseDto) => (
+      <p className="text-zinc-400">{value}</p>
+    ),
+  },
+];
+```
+
+### Search with Debounce
+
+```typescript
+const [searchTerm, setSearchTerm] = useState("");
+const [debouncedSearch] = useDebounce(searchTerm, 600);
+
+useEffect(() => {
+  updateParams({ search: debouncedSearch, page: 1 });
+}, [debouncedSearch]);
+```
+
+## Best Practices
+
+1. **Always use TypeScript** - No `any` types, use proper types
+2. **Use React Query** - Never use useState for server data
+3. **Validate forms** - Always use Zod schemas with React Hook Form
+4. **Localize everything** - Never hardcode user-facing strings
+5. **Handle loading states** - Show loading indicators during async operations
+6. **Handle errors gracefully** - Use toast notifications
+7. **Use consistent naming** - Follow the naming conventions
+8. **Export from index files** - Use barrel exports for cleaner imports
+9. **Use proper query keys** - Include all relevant parameters in queryKey arrays
+10. **Debounce search** - Always debounce search inputs
+11. **Reset forms** - Always reset forms after successful submission
+12. **Use URL params** - Store filters/pagination in URL for shareable links
+13. **Use guards** - Protect routes with AuthGuard and RoleGuard
+14. **Use context** - Use UserContext for user data and permissions
+15. **Follow folder structure** - Keep features organized in their folders
+
+## Component Guidelines
+
+### Form Components
+- Always support `disabled` prop
+- Always support `error` and `hint` props for validation
+- Use `forwardRef` when needed for React Hook Form integration
+- Use consistent styling with Tailwind classes
+
+### UI Components
+- Make components generic and reusable
+- Use TypeScript generics for type safety
+- Support customization via className prop
+- Follow dark theme design system
+
+### Modal Components
+- Always accept `isOpen` and `onClose` props
+- Accept optional `onSuccess` callback
+- Reset form on close
+- Show loading state during mutations
+
+## Import Organization
+
+1. React and React-related imports
+2. Third-party library imports
+3. Feature imports (from features folder)
+4. Component imports (from components folder)
+5. Common imports (from common folder)
+6. Type imports
+7. Relative imports (use sparingly)
+
+Example:
+```typescript
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "use-debounce";
+
+import { useLocale, showToast } from "../../../features/common";
+import { useGetUsers } from "../../../features/users";
+
+import { DataTable } from "../../../components/ui/table";
+import { Button } from "../../../components/form/button";
+
+import type { UserResponseDto } from "../../../features/users/types";
+```
+
+## Important Notes
+
+- **Never mutate server state directly** - Always use mutations
+- **Always handle loading states** - Show loading indicators
+- **Always handle errors** - Use toast notifications
+- **Use React Query's cache** - Don't refetch unnecessarily
+- **Keep components focused** - One component, one responsibility
+- **Use custom hooks** - Extract reusable logic into hooks
+- **Type everything** - Use TypeScript to its full potential
+- **Follow the patterns** - Consistency is key
+- **Use barrel exports** - Keep imports clean with index.ts files
+- **Localize all strings** - Never hardcode user-facing text
+

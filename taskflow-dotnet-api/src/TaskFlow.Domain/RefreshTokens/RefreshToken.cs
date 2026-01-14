@@ -1,0 +1,23 @@
+using TaskFlow.Domain.Sessions;
+using TaskFlow.Domain.Shared.BaseEntities.Abstractions;
+using TaskFlow.Domain.Users;
+
+namespace TaskFlow.Domain.RefreshTokens;
+
+public class RefreshToken : FullAuditedEntity<Guid>
+{
+    public string Token { get; set; } = null!;
+    public DateTime? ExpiryTime { get; set; }
+    
+    public bool IsUsed { get; set; } = false;
+    public string? ReplacedByToken { get; set; }
+    
+    public bool IsRevoked { get; set; } = false;
+    public DateTime? RevokedTime { get; set; }
+    
+    public Guid UserId { get; set; }
+    public virtual User User { get; set; } = null!;
+    
+    public Guid SessionId { get; set; }
+    public virtual Session Session { get; set; } = null!;
+}
