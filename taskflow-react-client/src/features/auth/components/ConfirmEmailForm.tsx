@@ -113,11 +113,13 @@ export const ConfirmEmailForm = ({ email }: ConfirmEmailFormProps) => {
           />
         )}
 
-        <form onSubmit={
-          remainingAttempts === 0
-            ? (e) => e.preventDefault()
-            : handleSubmit(onSubmit)
-        }
+        <form onSubmit={(e) => {
+          if (remainingAttempts === 0) {
+            e.preventDefault();
+          } else {
+            handleSubmit(onSubmit)(e);
+          }
+        }}
           className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="code">

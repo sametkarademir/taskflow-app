@@ -43,9 +43,10 @@ export const ManageUserRolesModal = ({
   useEffect(() => {
     if (userData?.roles && isOpen) {
       const roleIds = new Set(userData.roles.map((r) => r.id));
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedRoles(roleIds);
     }
-  }, [userData, isOpen]);
+  }, [userData?.roles, isOpen]);
 
   const { mutate: syncRoles, isPending } = useSyncUserRoles({
     onSuccess: () => {

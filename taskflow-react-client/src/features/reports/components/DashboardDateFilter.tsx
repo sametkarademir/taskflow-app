@@ -28,11 +28,14 @@ export const DashboardDateFilter = ({
   // Sync with external value changes
   useEffect(() => {
     if (value) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setDateRange(value.dateRange || DateRangeType.ThisWeek);
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStartDate(value.startDate || "");
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setEndDate(value.endDate || "");
     }
-  }, [value]);
+  }, [value?.dateRange, value?.startDate, value?.endDate]);
 
   // Initialize with default value on mount if no value provided
   useEffect(() => {
@@ -43,7 +46,7 @@ export const DashboardDateFilter = ({
         endDate: null,
       });
     }
-  }, []);
+  }, [onChange, value?.dateRange, value?.startDate, value?.endDate]);
 
   const dateRangeOptions: SelectOption[] = [
     { value: DateRangeType.Today, label: t("pages.reports.dateRange.today") },

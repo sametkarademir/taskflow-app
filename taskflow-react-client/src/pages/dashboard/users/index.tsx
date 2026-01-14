@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import {
@@ -66,7 +66,7 @@ export const UsersPage = () => {
 
   const { data: usersData, isLoading, refetch } = useGetPageableAndFilterUsers(params);
 
-  const updateParams = (newParams: Partial<GetListUsersRequestDto>) => {
+  const updateParams = useCallback((newParams: Partial<GetListUsersRequestDto>) => {
     const updatedParams = new URLSearchParams(searchParams);
 
     Object.entries(newParams).forEach(([key, value]) => {
@@ -78,11 +78,11 @@ export const UsersPage = () => {
     });
 
     setSearchParams(updatedParams);
-  };
+  }, [searchParams, setSearchParams]);
 
   useEffect(() => {
     updateParams({ search: debouncedSearch, page: 1 });
-  }, [debouncedSearch]);
+  }, [debouncedSearch, updateParams]);
 
   const handleStatusFilterChange = (filter: "all" | "active" | "inactive") => {
     setStatusFilter(filter);

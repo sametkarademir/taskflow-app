@@ -61,9 +61,13 @@ export const CreateUserModal = ({
     onClose();
   };
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const emailConfirmed = watch("emailConfirmed");
+  // eslint-disable-next-line react-hooks/incompatible-library
   const phoneNumberConfirmed = watch("phoneNumberConfirmed");
+  // eslint-disable-next-line react-hooks/incompatible-library
   const twoFactorEnabled = watch("twoFactorEnabled");
+  // eslint-disable-next-line react-hooks/incompatible-library
   const isActive = watch("isActive");
 
   return (

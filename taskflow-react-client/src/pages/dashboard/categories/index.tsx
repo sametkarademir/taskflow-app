@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import { Edit2, Trash2, Search, Plus } from "lucide-react";
@@ -41,7 +41,7 @@ export const CategoryPage = () => {
 
   const { data: categoriesData, isLoading, refetch } = useGetPagedAndFilterCategories(params);
 
-  const updateParams = (newParams: Partial<GetListCategoriesRequestDto>) => {
+  const updateParams = useCallback((newParams: Partial<GetListCategoriesRequestDto>) => {
     const updatedParams = new URLSearchParams(searchParams);
 
     Object.entries(newParams).forEach(([key, value]) => {
@@ -53,11 +53,11 @@ export const CategoryPage = () => {
     });
 
     setSearchParams(updatedParams);
-  };
+  }, [searchParams, setSearchParams]);
 
   useEffect(() => {
     updateParams({ search: debouncedSearch, page: 1 });
-  }, [debouncedSearch]);
+  }, [debouncedSearch, updateParams]);
 
   // Handle edit category
   const handleEdit = (categoryId: string) => {

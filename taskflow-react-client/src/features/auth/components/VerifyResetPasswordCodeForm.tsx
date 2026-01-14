@@ -98,11 +98,13 @@ export const VerifyResetPasswordCodeForm = ({
         )}
 
         <form
-          onSubmit={
-            remainingAttempts === 0
-              ? (e) => e.preventDefault()
-              : handleSubmit(onSubmit)
-          }
+          onSubmit={(e) => {
+            if (remainingAttempts === 0) {
+              e.preventDefault();
+            } else {
+              handleSubmit(onSubmit)(e);
+            }
+          }}
           className="space-y-6"
         >
           <div className="space-y-2">

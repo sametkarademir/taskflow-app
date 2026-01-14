@@ -41,7 +41,16 @@ jobs:
 
       - name: Test
         working-directory: ./taskflow-dotnet-api
-        run: dotnet test --no-build --verbosity normal --configuration Release
+        run: dotnet test --no-build --verbosity detailed --configuration Release --logger "trx;LogFileName=test-results.trx" --logger "console;verbosity=detailed" --collect:"XPlat Code Coverage"
+        continue-on-error: false
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: taskflow-dotnet-api/**/test-results.trx
+          retention-days: 30
 
   # Frontend Build and Test
   build-test-frontend:

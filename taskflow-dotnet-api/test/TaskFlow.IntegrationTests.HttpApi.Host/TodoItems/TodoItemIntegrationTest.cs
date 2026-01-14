@@ -266,6 +266,7 @@ public class TodoItemIntegrationTest : BaseIntegrationTest
         {
             Title = $"Updated TodoItem {Guid.NewGuid():N}",
             Description = "Updated TodoItem description",
+            Status = TodoStatus.Backlog,
             Priority = TodoPriority.Medium,
             DueDate = DateTime.UtcNow.AddDays(14),
             CategoryId = _testCategoryId
@@ -296,6 +297,7 @@ public class TodoItemIntegrationTest : BaseIntegrationTest
         Assert.Equal(_testTodoItemId, todoItem.Id);
         Assert.Equal(updateRequest.Title, todoItem.Title);
         Assert.Equal(updateRequest.Description, todoItem.Description);
+        Assert.Equal(updateRequest.Status, todoItem.Status);
         Assert.Equal(updateRequest.Priority, todoItem.Priority);
         Assert.Equal(updateRequest.CategoryId, todoItem.CategoryId);
 

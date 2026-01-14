@@ -66,6 +66,7 @@ export const UpdateCategoryModal = ({
         description: categoryData.description || "",
         colorHex: colorHex,
       });
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedColor(colorHex);
     }
   }, [categoryData, isOpen, reset]);

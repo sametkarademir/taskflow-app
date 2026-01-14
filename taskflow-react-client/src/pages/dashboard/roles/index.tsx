@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import { Edit2, Trash2, Shield, Search, Plus } from "lucide-react";
@@ -43,7 +43,7 @@ export const RolesPage = () => {
 
   const { data: rolesData, isLoading, refetch } = useGetPageableAndFilterRoles(params);
 
-  const updateParams = (newParams: Partial<GetListRolesRequestDto>) => {
+  const updateParams = useCallback((newParams: Partial<GetListRolesRequestDto>) => {
     const updatedParams = new URLSearchParams(searchParams);
 
     Object.entries(newParams).forEach(([key, value]) => {
@@ -55,11 +55,11 @@ export const RolesPage = () => {
     });
 
     setSearchParams(updatedParams);
-  };
+  }, [searchParams, setSearchParams]);
 
   useEffect(() => {
     updateParams({ search: debouncedSearch, page: 1 });
-  }, [debouncedSearch]);
+  }, [debouncedSearch, updateParams]);
 
   // Helper function to check if role is Admin or TodoUser
   const isAdminRole = (roleName: string) => roleName === "Admin";

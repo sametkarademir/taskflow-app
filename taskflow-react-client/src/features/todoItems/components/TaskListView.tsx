@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 import { Edit2, Search, Plus, Calendar } from "lucide-react";
@@ -61,7 +61,7 @@ export const TaskListView = ({ filters, onRefetch }: TaskListViewProps) => {
 
   const { data: todoItemsData, isLoading, refetch } = useGetPagedAndFilterTodoItems(params);
 
-  const updateParams = (newParams: Partial<GetPagedAndFilterTodoItemsRequestDto>) => {
+  const updateParams = useCallback((newParams: Partial<GetPagedAndFilterTodoItemsRequestDto>) => {
     const updatedParams = new URLSearchParams(searchParams);
 
     Object.entries(newParams).forEach(([key, value]) => {
@@ -73,11 +73,11 @@ export const TaskListView = ({ filters, onRefetch }: TaskListViewProps) => {
     });
 
     setSearchParams(updatedParams);
-  };
+  }, [searchParams, setSearchParams]);
 
   useEffect(() => {
     updateParams({ search: debouncedSearch, page: 1 });
-  }, [debouncedSearch]);
+  }, [debouncedSearch, updateParams]);
 
   const handleArchiveFilterChange = (filter: "all" | "archived" | "active") => {
     setArchiveFilter(filter);

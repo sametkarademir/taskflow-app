@@ -128,6 +128,7 @@ public class ActivityLogIntegrationTest : BaseIntegrationTest
         {
             Title = $"Updated TodoItem for ActivityLog {Guid.NewGuid():N}",
             Description = "Updated description to generate activity log",
+            Status = TodoStatus.InProgress,
             Priority = TodoPriority.High,
             CategoryId = _testCategoryId
         };

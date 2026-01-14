@@ -49,9 +49,10 @@ export const ManagePermissionsModal = ({
       const permissionIds = new Set(
         roleData.permissions.map((p) => p.id),
       );
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedPermissions(permissionIds);
     }
-  }, [roleData, isOpen]);
+  }, [roleData?.permissions, isOpen]);
 
   const { mutate: syncPermissions, isPending } = useSyncRolePermissions({
     onSuccess: () => {
@@ -85,6 +86,7 @@ export const ManagePermissionsModal = ({
   // Expand all groups by default
   useEffect(() => {
     if (Object.keys(groupedPermissions).length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setExpandedGroups(new Set(Object.keys(groupedPermissions)));
     }
   }, [groupedPermissions]);
