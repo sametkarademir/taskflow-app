@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Backend API (.NET)
+  backend:
+    build:
+      context: ./taskflow-dotnet-api
+      dockerfile: Dockerfile
+    container_name: taskflow-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__Default=${DB_CONNECTION_STRING:-Host=localhost;Port=5432;Database=task_flow_db;User ID=admin;Password=Password0!;}
+      - Cors__AllowedOrigins__0=http://localhost:3000
+      - Cors__AllowedOrigins__1=http://localhost:5173
+      - Cors__AllowedOrigins__2=http://localhost:80
+      - Cors__AllowCredentials=true
+      - Hangfire__Username=taskflow
+      - Hangfire__Password=TGFqCojv5eRKnfl6gQ9w66GmTlDntpN6s2Lya7VsoaVcJfuT16i8jfGTgRsnvrU
+      - Hangfire__Url=/hangfire
+      - Hangfire__Title=Taskflow Service - Hangfire Dashboard
+      - Hangfire__CronJobsEnabled=true
+      - Smtp__Host=smtp.taskflow.com
+      - Smtp__Port=465
+      - Smtp__EnableSsl=true
+      - Smtp__UserName=info@taskflow.com
+      - Smtp__Password=Password!
+      - Smtp__FromEmail=info@taskflow.com
+      - Smtp__FromName=Taskflow App
+    ports:
+      - "5052:8080"
+    networks:
+      - taskflow-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend (React + Vite)
+  frontend:
+    build:
+      context: ./taskflow-react-client
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: ${API_BASE_URL:-http://localhost:5052}
+    container_name: taskflow-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - taskflow-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  taskflow-network:
+    driver: bridge
