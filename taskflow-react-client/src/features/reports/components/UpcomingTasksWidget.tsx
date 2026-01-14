@@ -24,7 +24,7 @@ export const UpcomingTasksWidget = ({
     });
   };
 
-  const renderTaskList = (tasks: typeof data.todayTasks, title: string) => {
+  const renderTaskList = (tasks: typeof data.todayTasks) => {
     if (tasks.length === 0) {
       return (
         <div className="text-sm text-zinc-500 py-4 text-center">
@@ -87,17 +87,14 @@ export const UpcomingTasksWidget = ({
           <h4 className="text-sm font-medium text-zinc-400 mb-3">
             {t("pages.reports.widgets.today")}
           </h4>
-          {renderTaskList(data.todayTasks, t("pages.reports.widgets.today"))}
+          {renderTaskList(data.todayTasks)}
         </div>
 
         <div>
           <h4 className="text-sm font-medium text-zinc-400 mb-3">
             {t("pages.reports.widgets.thisWeek")}
           </h4>
-          {renderTaskList(
-            data.thisWeekTasks,
-            t("pages.reports.widgets.thisWeek"),
-          )}
+          {renderTaskList(data.thisWeekTasks)}
         </div>
       </div>
     </div>

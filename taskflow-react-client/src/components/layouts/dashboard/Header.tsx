@@ -1,11 +1,10 @@
 import { useLocation } from "react-router-dom";
 
-import { Search, Bell, Plus, Menu } from "lucide-react";
+import { Bell, Menu } from "lucide-react";
 
 import { useSidebar } from "../../../contexts/sidebarContext";
 import { useLocale } from "../../../features/common/hooks/useLocale";
 
-import { Button } from "../../form/button";
 import { LanguageSwitcher } from "../../../features/auth/components/LanguageSwitcher";
 
 export const Header = () => {

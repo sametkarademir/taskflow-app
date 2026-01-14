@@ -135,14 +135,13 @@ export const ActivityTab = ({ todoItemId }: ActivityTabProps) => {
         );
 
       case "LOG_STATUS_CHANGED": {
-        const oldStatus = log.oldValue || "";
         const newStatus = log.newValue || "";
         return (
           <>
             <span className={userNameClassName}>{userName}</span>{" "}
             {t("pages.activityLogs.messages.statusChanged", {
               user: "",
-              oldStatus: "",
+              oldStatus: log.oldValue || "",
               newStatus: "",
             })}{" "}
             <span
