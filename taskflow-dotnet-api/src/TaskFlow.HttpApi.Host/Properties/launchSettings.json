@@ -16,15 +16,7 @@
       "launchBrowser": false,
       "applicationUrl": "https://localhost:7184;http://localhost:5052",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "ConnectionStrings__Default": "Host=localhost;Port=5432;Database=task_flow_db;User ID=admin;Password=Pass*600312;",
-        "Smtp__Host": "smtp.hostinger.com",
-        "Smtp__Port": "465",
-        "Smtp__EnableSsl": "true",
-        "Smtp__UserName": "info@sametkarademir.com",
-        "Smtp__Password": "fDv7wSGL+0r",
-        "Smtp__FromEmail": "info@sametkarademir.com",
-        "Smtp__FromName": "TaskFlow App"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   }
