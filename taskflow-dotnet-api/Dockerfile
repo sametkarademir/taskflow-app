@@ -3,7 +3,6 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /src
 
 # Copy solution and project files
-COPY ["TaskFlow.sln", "./"]
 COPY ["src/TaskFlow.Domain.Shared/TaskFlow.Domain.Shared.csproj", "src/TaskFlow.Domain.Shared/"]
 COPY ["src/TaskFlow.Domain/TaskFlow.Domain.csproj", "src/TaskFlow.Domain/"]
 COPY ["src/TaskFlow.EntityFrameworkCore/TaskFlow.EntityFrameworkCore.csproj", "src/TaskFlow.EntityFrameworkCore/"]
@@ -13,8 +12,8 @@ COPY ["src/TaskFlow.HttpApi/TaskFlow.HttpApi.csproj", "src/TaskFlow.HttpApi/"]
 COPY ["src/TaskFlow.HttpApi.Client/TaskFlow.HttpApi.Client.csproj", "src/TaskFlow.HttpApi.Client/"]
 COPY ["src/TaskFlow.HttpApi.Host/TaskFlow.HttpApi.Host.csproj", "src/TaskFlow.HttpApi.Host/"]
 
-# Restore dependencies
-RUN dotnet restore "TaskFlow.sln"
+# Restore dependencies for HttpApi.Host project (which includes all dependencies)
+RUN dotnet restore "src/TaskFlow.HttpApi.Host/TaskFlow.HttpApi.Host.csproj"
 
 # Copy all source files
 COPY . .
