@@ -1,20 +1,16 @@
 name: Build, Test and Push Docker Images
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'taskflow-dotnet-api/**'
-      - 'taskflow-react-client/**'
-      - '.github/workflows/docker-build-push-simple.yml'
+  release:
+    types:
+      - published
   workflow_dispatch:
 
 env:
   REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
   BACKEND_IMAGE_NAME: taskflow-backend
   FRONTEND_IMAGE_NAME: taskflow-frontend
-  IMAGE_TAG: ${{ github.sha }}
+  IMAGE_TAG: ${{ github.event.release.tag_name || github.sha }}
 
 jobs:
   # Backend Build and Test
