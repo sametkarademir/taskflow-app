@@ -30,6 +30,12 @@ RUN dotnet publish "TaskFlow.HttpApi.Host.csproj" -c Release -o /app/publish /p:
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS final
 WORKDIR /app
 
+# Install curl for healthcheck (as root before creating user)
+USER root
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
+
 # Create a non-root user
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 
